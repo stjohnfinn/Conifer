@@ -12,7 +12,7 @@ DATA_size = 10_000
 # returns an entire row as a string
 def create_data_point():
   x = random.randint(0, 10_000)
-  y = 2 * x + 1
+  y = 1 if x % 2 == 0 else 0
   return f"{x}, {y}"
 
 with open(f'{DATA_dir}/basic_data.csv', 'w+') as data_file:
