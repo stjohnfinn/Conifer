@@ -8,6 +8,8 @@ import random
 
 DATA_dir = 'data'
 DATA_size = 10_000
+DATA_input_label = 'input'
+DATA_output_label = 'output'
 
 # returns an entire row as a string
 def create_data_point():
@@ -17,7 +19,7 @@ def create_data_point():
 
 with open(f'{DATA_dir}/basic_data.csv', 'w+') as data_file:
   # header
-  data_file.write('x,y\n')
+  data_file.write(f'{DATA_input_label},{DATA_output_label}\n')
 
   # generate data according to create_data_point
   for i in range(DATA_size):
