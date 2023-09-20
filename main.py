@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
 import random
+import numpy as np
+import ./perceptron.py
 
 #
-# Generate Extremely Basic Data   
+# Generate Extremely Basic Data
 #
 
 DATA_dir = 'data'
@@ -27,3 +29,17 @@ with open(f'{DATA_dir}/basic_data.csv', 'w+') as data_file:
     data_file.write(line)
 
 print('Generated data!')
+
+data = np.loadtxt(f'{DATA_dir}/basic_data.csv', delimiter=',', skiprows=1)
+
+X = data[:,0]
+y = data[:,1]
+
+print('Loaded data!')
+
+# create perceptron
+
+learning_rate = 0.01
+epochs = 100
+
+net = Perceptron1d(X=X, y=y, learning_rate=learning_rate, epochs=epochs)
