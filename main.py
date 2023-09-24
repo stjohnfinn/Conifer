@@ -2,21 +2,27 @@
 
 import random
 import numpy as np
-import ./perceptron.py
+
+from perceptron import *
 
 #
 # Generate Extremely Basic Data
 #
 
 DATA_dir = 'data'
-DATA_size = 10_000
+DATA_size = 5
 DATA_input_label = 'input'
 DATA_output_label = 'output'
 
 # returns an entire row as a string
 def create_data_point():
-  x = random.randint(0, 10_000)
-  y = 1 if x % 2 == 0 else 0
+  x = random.uniform(0, 100)
+
+  # decision boundary: data is 1d, so decision boundary must split a 1d object (a line)
+  # this means it's really just a point
+  # let's go with   x == 22
+  y = 0 if x < 22 else 1
+
   return f"{x}, {y}"
 
 with open(f'{DATA_dir}/basic_data.csv', 'w+') as data_file:
@@ -32,14 +38,24 @@ print('Generated data!')
 
 data = np.loadtxt(f'{DATA_dir}/basic_data.csv', delimiter=',', skiprows=1)
 
+print('Loaded data!')
+
 X = data[:,0]
 y = data[:,1]
 
-print('Loaded data!')
+# show proportion of classes
+positive_samples = 0
+for label in y:
+  if label == 1:
+    positive_samples += 1
+print(f'Data is {positive_samples/len(y)} positive and {(len(y)-positive_samples)/len(y)} negative.')
 
 # create perceptron
 
-learning_rate = 0.01
-epochs = 100
+learning_rate = 0.001
+epochs = 1
+threshold = 0.80
 
-net = Perceptron1d(X=X, y=y, learning_rate=learning_rate, epochs=epochs)
+net = Perceptron1d(X=X, y=y, learning_rate=learning_rate, epochs=epochs, threshold=threshold)
+
+net.train()
