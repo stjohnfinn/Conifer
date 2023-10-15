@@ -24,7 +24,7 @@ The main parts of this code:
     1. for the 1d perceptron, I'm generating it myself because it's trivial
     1. for the Xd perceptron, I'm probably going to use a dataset I find online
     1. transform or format the data to a usable form
-1. create network
+1. create perceptron
     1. feed hyperparameters and stuff
     1. initialize weights and biases
         1. this should be random initialization
